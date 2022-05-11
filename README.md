@@ -21,4 +21,24 @@ Reason for this tutorial: focus more on the complete business solution rather th
 
 Contoso ToDo Product team has already migrated a couple of their applications into Azure App Service. These applications are using custom implemented Authentication and Authorization. They have heard about Microsoft Zero Trust concept and would like to protect their externally exposed APIs, API back-end and the Azure SQL data.
 
-The team would like to increase developer velocity while using serverless technologies such as Azure Functions  
+The team would like to increase developer velocity while using serverless technologies such as Azure Functions
+
+## - Create Azure Functions in VS Code
+
+Please refer to this [existing tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=csharp) and create the following Functions:
+
+* AddToDo
+* DeleteToDo
+* GetToDo
+* GetToDos
+* UpdateToDo
+
+All these Functions will be using HTTP Trigger and also different HTTP Methods
+
+The test samples for them are here:
+[sample](test.http)
+![](docs/media/2022-05-11-16-34-46.png)
+
+The result is in the [branch](https://github.com/gbelenky/function-with-aad-apim-sql/tree/Step-1--Create-Functions) of this repo
+
+
