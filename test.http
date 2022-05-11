@@ -1,0 +1,19 @@
+GET http://localhost:7071/api/GetToDos HTTP/1.1
+
+###
+GET http://localhost:7071/api/GetToDo?id=4711 HTTP/1.1
+
+###
+DELETE http://localhost:7071/api/DeleteToDo?id=4711 HTTP/1.1
+
+###
+PATCH http://localhost:7071/api/UpdateToDo?id=4711  HTTP/1.1
+Content-Type: application/json
+
+{"title":"cut the gras"}
+
+###
+POST http://localhost:7071/api/AddToDo  HTTP/1.1
+Content-Type: application/json
+
+{"title":"buy a jet"}
