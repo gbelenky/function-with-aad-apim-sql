@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -18,25 +19,25 @@ namespace gbelenky.ToDo
             ILogger log,
             [Sql("dbo.ToDo", ConnectionStringSetting = "SqlConnectionString")] IAsyncCollector<ToDoItem> toDoItems)
         {
+            string id = req.Query["id"];
+
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            List<ToDoItem> incomingToDoItems = JsonConvert.DeserializeObject<List<ToDoItem>>(requestBody);
-
-            // existing at first position, new at second position
-            ToDoItem toDoItem = incomingToDoItems[0];
-            ToDoItem newToDoItem = incomingToDoItems[1];
-
-            // compare the two items attributes
-            if (newToDoItem.title != null)
+            ToDoItem toDoItem = JsonConvert.DeserializeObject<ToDoItem>(requestBody);
+            toDoItem.id = new Guid(id);
+            
+            
+            if (toDoItem.title == null)
             {
-                toDoItem.title = newToDoItem.title;
+                toDoItem.title = "no title";
             }
-            if (newToDoItem.completed != null)
+            if (toDoItem.completed == null)
             {
-                toDoItem.completed = newToDoItem.completed;
+                toDoItem.completed = false;
             }
 
             await toDoItems.AddAsync(toDoItem);
             await toDoItems.FlushAsync();
+            List<ToDoItem> toDoItemList = new List<ToDoItem> { toDoItem };
 
             return new OkObjectResult(toDoItem);
         }

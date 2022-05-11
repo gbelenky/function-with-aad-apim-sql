@@ -25,7 +25,11 @@ namespace gbelenky.ToDo
             // generate a new id for the todo item
             toDoItem.id = Guid.NewGuid();
 
-            // if completed is not provided, default to false
+            
+            if (toDoItem.title == null)
+            {
+                toDoItem.title = "no title";
+            }
             if (toDoItem.completed == null)
             {
                 toDoItem.completed = false;
