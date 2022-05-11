@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,15 +15,10 @@ namespace gbelenky.ToDo
         [FunctionName("GetToDo")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log,
+             [Sql("select Id, title, completed from dbo.ToDo where @id = id", CommandType = System.Data.CommandType.Text, Parameters = "@id={Query.id}", ConnectionStringSetting = "SqlConnectionString")] IEnumerable<ToDoItem> toDo)
         {
-            string id = req.Query["id"];
-            log.LogInformation($"getting content of ToDo Id: {id}");
-
-            string responseMessage = string.IsNullOrEmpty(id)
-                ? "Pass a ToDo id in the query string to get the ToDo content"
-                : $"This is your ToDo id: {id} content ... not implemented yet";
-            return new OkObjectResult(responseMessage);
+            return new OkObjectResult(toDo);
         }
     }
 }

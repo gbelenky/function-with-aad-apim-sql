@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +15,10 @@ namespace gbelenky.ToDo
         [FunctionName("GetToDos")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log,
+            [Sql("select Id, title, completed from dbo.ToDo", CommandType = System.Data.CommandType.Text, ConnectionStringSetting = "SqlConnectionString")] IEnumerable<ToDoItem> toDoItems)
         {
-            log.LogInformation("Listing all ToDos");
-
-            string responseMessage = "Listed all ToDos";
-            return new OkObjectResult(responseMessage);
+            return new OkObjectResult(toDoItems);
         }
     }
 }
