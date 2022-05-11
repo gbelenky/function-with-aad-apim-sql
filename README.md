@@ -42,3 +42,34 @@ The test samples for them are here:
 The result is in the [branch](https://github.com/gbelenky/function-with-aad-apim-sql/tree/Step-1--Create-Functions) of this repo
 
 
+Install [HTTP REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), start the Function and run the tests on your local machine by using the [sample requests](test.http)
+
+## Create the SQL Database and tables
+
+Use this [quickstart](https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-create-quickstart) to create your database - do not add sample data to your database as it is descibed in the tutorial
+
+Select the Query Editor in your newly created database and execute [this script](/sql/create.sql) there:
+
+![](docs/media/2022-05-11-18-19-38.png)
+
+Add .NET packages for Azure Functions SQL binding as [referred here](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Sql)
+
+Open VSCode terminal and execute there 
+
+```
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Sql --version 0.1.311-preview
+
+```
+
+Start adding bindings to the code - start with [AddToDo.cs](AddToDo.cs)
+
+![](docs/media/2022-05-11-18-35-33.png)
+
+You also need to update your local.settings.json file configuring the SQLConnectionString
+![](docs/media/2022-05-11-18-38-46.png)
+
+Replace your code by the content here [AddToDo.cs](), run the Function project and call the function from the [test.http] and observe the results
+![](docs/media/2022-05-11-18-49-08.png)
+
+Continue with the [GetToDo.cs](GetToDo.cs)
+

@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,20 +15,30 @@ namespace gbelenky.ToDo
         [FunctionName("UpdateToDo")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log,
+            [Sql("dbo.ToDo", ConnectionStringSetting = "SqlConnectionString")] IAsyncCollector<ToDoItem> toDoItems)
         {
-
-            string id = req.Query["id"];
-            log.LogInformation($"Updating ToDo Id: {id}");
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            List<ToDoItem> incomingToDoItems = JsonConvert.DeserializeObject<List<ToDoItem>>(requestBody);
 
-            string responseMessage = string.IsNullOrEmpty(id)
-               ? "Pass a ToDo id in the query string to update the ToDo content"
-                : $"This is your updated ToDo id: {id} content ... not implemented yet";
+            // existing at first position, new at second position
+            ToDoItem toDoItem = incomingToDoItems[0];
+            ToDoItem newToDoItem = incomingToDoItems[1];
 
-            return new OkObjectResult(responseMessage);
+            // compare the two items attributes
+            if (newToDoItem.title != null)
+            {
+                toDoItem.title = newToDoItem.title;
+            }
+            if (newToDoItem.completed != null)
+            {
+                toDoItem.completed = newToDoItem.completed;
+            }
+
+            await toDoItems.AddAsync(toDoItem);
+            await toDoItems.FlushAsync();
+
+            return new OkObjectResult(toDoItem);
         }
     }
 }
