@@ -1,16 +1,16 @@
 GET http://localhost:7071/api/GetToDos HTTP/1.1
 
 ###
-GET http://localhost:7071/api/GetToDo?id=6a618b41-c745-4eca-b144-19e6e73b6641 HTTP/1.1
+GET http://localhost:7071/api/GetToDo?id=069fbcd6-047a-45d8-a1ba-0a4cf719643bHTTP/1.1
 
 ###
-DELETE http://localhost:7071/api/DeleteToDo?id=4711 HTTP/1.1
+DELETE http://localhost:7071/api/DeleteToDo?id=6a618b41-c745-4eca-b144-19e6e73b6641 HTTP/1.1
 
 ###
-PATCH http://localhost:7071/api/UpdateToDo?id=6a618b41-c745-4eca-b144-19e6e73b6641 HTTP/1.1
+PATCH http://localhost:7071/api/UpdateToDo?id=069fbcd6-047a-45d8-a1ba-0a4cf719643b HTTP/1.1
 Content-Type: application/json
 
-{"title":"cut the gras"}
+{"title":"cut the grass - updated"}
 
 ###
 POST http://localhost:7071/api/AddToDo  HTTP/1.1
