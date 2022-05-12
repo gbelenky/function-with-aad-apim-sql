@@ -134,3 +134,39 @@ You can test all your functions from the Azure Portal or add corresponding reque
 In my case it is https://function-with-aad-apim-sql.azurewebsites.net/api/GetToDos
 
 ## Expose the API through the API management
+
+Create a new API management instance:
+
+![](docs/media/2022-05-12-13-55-51.png)
+
+![](docs/media/2022-05-12-13-56-25.png)
+
+![](docs/media/2022-05-12-13-57-55.png)
+
+Create Managed Identity for your API Management
+![](docs/media/2022-05-12-13-59-03.png)
+
+Optionally add Application Insights to your API Management
+![](docs/media/2022-05-12-14-01-10.png)
+
+Review and Create your API Management. This will take some minutes to be completed.
+
+Select the APIM resource you jut creted, go to the APIs blade and select "Create from Azure Resource" - "Function App"
+
+![](docs/media/2022-05-12-15-17-37.png)
+
+Search and select your Function App
+
+![](docs/media/2022-05-12-15-20-06.png)
+
+Select and import all Functions from your Function App
+
+![](docs/media/2022-05-12-15-20-53.png)
+
+Click "Create"
+
+![](docs/media/2022-05-12-15-21-32.png)
+
+After the import you will land in the Design Blade of the APIM
+
+![](docs/media/2022-05-12-15-22-52.png)
