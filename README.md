@@ -201,5 +201,77 @@ Click Add
 
 Note App (client) Id
 
-Try to access your back-end now 
+Try to access your back-end now:
+
+![](docs/media/2022-05-12-18-36-55.png)
+
+and this is the result
+
+![](docs/media/2022-05-12-18-37-34.png)
+
+when testing the Function from APIM you will get the same result:
+
+![](docs/media/2022-05-12-18-39-07.png)
+
+there is a different picture when testing in the browser:
+
+![](docs/media/2022-05-12-18-42-16.png)
+
+![](docs/media/2022-05-12-18-43-03.png)
+
+This means that we limited access to the back-end API only to the indentities inside of the Azure AD tenant where we created identity of the Azure Function (also called Managed Identity describing the Service Principal which was also instantiated in the same AAD Tenant). But still, all identities can access our Function - we need to change it
+
+
+### Step 2. Allow APIM to access the Function
+
+Before we limit access to the backend, we need to allow APIM to access our Function. [The following policy will help us](https://docs.microsoft.com/en-us/azure/api-management/api-management-authentication-policies#use-managed-identity-to-authenticate-with-a-backend-service) to the APIM
+
+```
+<authentication-managed-identity resource="Client_id_of_Backend"/>
+
+```
+
+If you did not note the Client Id of your Function, you need to revisit the Authentication blade of the Function:
+
+![](docs/media/2022-05-12-18-54-46.png)
+
+Jump back to APIM and select your API:
+
+Click Inbound Processing -> Policies
+
+![](docs/media/2022-05-12-18-57-00.png)
+
+Add the following line and replace the resource with your Azure Function Client Id:
+
+![](docs/media/2022-05-12-19-02-10.png)
+
+Save it and test your API again:
+
+Our request was successful:
+
+![](docs/media/2022-05-12-19-04-52.png)
+
+### Step 3. Allow ONLY APIM to access the Function
+
+If you're unfamiliar with managed identities for Azure resources, check out the [overview section](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview). Be sure to review the [difference between a system-assigned and user-assigned managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
+
+
+Find the object ID of the managed identity's service principal of the APIM instance. 
+
+
+
+![](docs/media/2022-05-12-19-13-17.png)
+
+Go to Azure Active Directory and open the Enterprise applications page, then find the application and look for the Object ID
+
+
+
+
+
+
+Use the Bash environment in [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart). For more information, see [Azure Cloud Shell Quickstart - Bash](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart).
+
+[Launch Cloud Shell in a new window](https://shell.azure.com/)
+
+
 
