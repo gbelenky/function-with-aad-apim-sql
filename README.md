@@ -23,7 +23,7 @@ Contoso ToDo Product team has already migrated a couple of their applications in
 
 The team would like to increase developer velocity while using serverless technologies such as Azure Functions
 
-## - Create Azure Functions in VS Code
+## Create Azure Functions in VS Code
 
 Please refer to this [existing tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=csharp) and create the following Functions:
 
@@ -75,7 +75,7 @@ Continue with the [GetToDo.cs](GetToDo.cs), [GetToDos.cs](GetToDos.cs), [DeleteT
 
 Test the rest of the functions with  [test.http](test.http)
 
-## Deploy Azure Functions to Azure
+## Deploy Azure Functions
 Please refer [to this document](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=csharp#enable-publishing-with-advanced-create-options) for the detailed deployment information 
 
 ![](docs/media/2022-05-12-13-18-50.png)
