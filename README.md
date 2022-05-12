@@ -170,3 +170,36 @@ Click "Create"
 After the import you will land in the Design Blade of the APIM
 
 ![](docs/media/2022-05-12-15-22-52.png)
+
+Test access to your backend API from the APIM
+
+![](docs/media/2022-05-12-15-32-32.png)
+
+![](docs/media/2022-05-12-15-33-09.png)
+
+As you can see here, your API is already protected by the automatically generated key:
+
+![](docs/media/2022-05-12-15-36-33.png)
+
+![](docs/media/2022-05-12-15-37-20.png)
+
+Now, we need to protect the backend API so that only APIM is able to access it.
+
+### Step 1. Configure authentication for your Functions App
+
+Go to your Function App and select the Authentication blade:
+
+![](docs/media/2022-05-12-15-56-03.png)
+
+Select Microsoft
+
+![](docs/media/2022-05-12-15-56-34.png)
+
+Click Add
+
+![](docs/media/2022-05-12-15-58-26.png)
+
+Note App (client) Id
+
+Try to access your back-end now 
+
