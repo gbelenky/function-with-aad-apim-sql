@@ -67,7 +67,7 @@ Start adding bindings to the code - start with [AddToDo.cs](AddToDo.cs)
 You also need to update your local.settings.json file configuring the SQLConnectionString
 ![](docs/media/2022-05-11-18-38-46.png)
 
-Replace your code by the content here [AddToDo.cs](), run the Function project and call the function from the [test.http](test.http) and observe the results
+Replace your code by the content here [AddToDo.cs](AddToDo.cs), run the Function project and call the function from the [test.http](test.http) and observe the results
 ![](docs/media/2022-05-11-18-49-08.png)
 
 Continue with the [GetToDo.cs](GetToDo.cs), [GetToDos.cs](GetToDos.cs), [DeleteToDo.cs](DeleteToDo.cs) and [UpdateToDo.cs](UpdateToDo.cs)
