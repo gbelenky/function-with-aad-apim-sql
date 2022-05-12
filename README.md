@@ -7,8 +7,8 @@ This step-by-step tutorial will implement architecture above and contain the fol
 - Create Azure Functions in VS Code
 - Create SQL Database and add SQL Bindings to the Functions. This repo enhances [this sample](https://docs.microsoft.com/en-us/samples/azure-samples/azure-sql-binding-func-dotnet-todo/todo-backend-dotnet-azure-sql-bindings-azure-functions/)
 - Deploy Azure Function into Azure
+- Expose the API through the API management
 - Protect access to Azure SQL through AAD while using Functions. [Based on this ](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) and [this tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity)
-- Expose API through the API mangement
 - Protect Back-End API through AAD so that only this APIM instance can access the back-end API
 - Protect exposed API through APIM API Keys for the external developers
 - Test access to the exposed API through the developer portal 
@@ -74,3 +74,64 @@ Replace your code by the content here [AddToDo.cs](), run the Function project a
 Continue with the [GetToDo.cs](GetToDo.cs), [GetToDos.cs](GetToDos.cs), [DeleteToDo.cs](DeleteToDo.cs) and [UpdateToDo.cs](UpdateToDo.cs)
 
 Test the rest of the functions with  [test.http](test.http)
+
+## Deploy Azure Functions to Azure
+Please refer [to this document](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs-code?tabs=csharp#enable-publishing-with-advanced-create-options) for the detailed deployment information 
+
+![](docs/media/2022-05-12-13-18-50.png)
+
+![](docs/media/2022-05-12-13-19-24.png)
+
+![](docs/media/2022-05-12-13-20-12.png)
+
+![](docs/media/2022-05-12-13-20-35.png)
+
+![](docs/media/2022-05-12-13-21-05.png)
+
+![](docs/media/2022-05-12-13-21-43.png)
+
+![](docs/media/2022-05-12-13-22-17.png)
+
+![](docs/media/2022-05-12-13-22-36.png)
+
+![](docs/media/2022-05-12-13-22-56.png)
+
+![](docs/media/2022-05-12-13-23-27.png)
+
+![](docs/media/2022-05-12-13-23-50.png)
+
+![](docs/media/2022-05-12-13-24-12.png)
+
+
+
+![](docs/media/2022-05-12-13-24-46.png)
+
+Upload local settings:
+
+![](docs/media/2022-05-12-13-29-25.png)
+
+Verify the deployment in the Azure Portal
+
+![](docs/media/2022-05-12-13-31-02.png)
+
+Verify your local settings were published. In my case I had to add the SQLConnectionString manually 
+
+![](docs/media/2022-05-12-13-34-22.png)
+
+Test your deployed Function
+
+![](docs/media/2022-05-12-13-37-02.png)
+
+![](docs/media/2022-05-12-13-37-45.png)
+
+![](docs/media/2022-05-12-13-39-03.png)
+
+![](docs/media/2022-05-12-13-38-44.png)
+
+You can test all your functions from the Azure Portal or add corresponding requests to the test.http file. You can find the Function URL here:
+
+![](docs/media/2022-05-12-13-42-27.png)
+
+In my case it is https://function-with-aad-apim-sql.azurewebsites.net/api/GetToDos
+
+## Expose the API through the API management
