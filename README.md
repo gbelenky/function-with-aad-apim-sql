@@ -8,10 +8,10 @@ This step-by-step tutorial will implement architecture above and contain the fol
 - Create SQL Database and add SQL Bindings to the Functions. This repo enhances [this sample](https://docs.microsoft.com/en-us/samples/azure-samples/azure-sql-binding-func-dotnet-todo/todo-backend-dotnet-azure-sql-bindings-azure-functions/)
 - Deploy Azure Function into Azure
 - Expose the API through the API management
-- Protect access to Azure SQL through AAD while using Functions. [Based on this ](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) and [this tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity)
 - Protect Back-End API through AAD so that only this APIM instance can access the back-end API
 - Protect exposed API through APIM API Keys for the external developers
-- Test access to the exposed API through the developer portal 
+- Test access to the exposed API through the developer portal
+- Optional. Protect access to Azure SQL through AAD while using Functions. [Based on this ](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) and [this tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) 
 
 Audience: teams exploring new generation cloud services implementation concepts
 
