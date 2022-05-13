@@ -258,12 +258,26 @@ If you're unfamiliar with managed identities for Azure resources, check out the 
 
 Find the object ID of the managed identity's service principal of the APIM instance. 
 
-
-
 ![](docs/media/2022-05-12-19-13-17.png)
 
-Go to Azure Active Directory and open the Enterprise applications page, then find the application and look for the Object ID
+Go to the application registration of the Functions and add App Role to it.
 
+![](docs/media/2022-05-12-19-27-45.png)
+
+![](docs/media/2022-05-12-19-28-35.png)
+
+The App Role will containt identities which will have access to the Function based backend API. Create a new App Role
+
+![](docs/media/2022-05-12-19-31-16.png)
+
+
+
+
+
+
+
+
+Go to Azure Active Directory and open the Enterprise applications page, then find the application and look for the Object ID
 
 
 
