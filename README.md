@@ -253,39 +253,97 @@ Our request was successful:
 
 ### Step 3. Allow ONLY APIM to access the Function
 
-If you're unfamiliar with managed identities for Azure resources, check out the [overview section](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview). Be sure to review the [difference between a system-assigned and user-assigned managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types).
+If you're unfamiliar with managed identities for Azure resources, check out the [overview section](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview). 
 
+Be sure to review the [difference between a system-assigned and user-assigned managed identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types). 
 
-Find the object ID of the managed identity's service principal of the APIM instance. 
+Here you can find more information on [Service Principals and Applications](https://docs.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)
 
-![](docs/media/2022-05-12-19-13-17.png)
+To limit access to APIM only you need to 
+- Create an App Role for your Function in its AAD registration (this will be correlated with the Service Principal of your AAD App Registration). App Role defines a group of users/applications anabled to access this application and receive receive this App Role as an authorization claim (outside of scope here. More [here](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps#usage-scenario-of-app-roles)) 
+- Add the APIM Managed Identity Object ID to the App Role
+- [Limit access to the Function only to the users/roles in the App Role](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users#update-the-app-to-require-user-assignment) 
 
-Go to the application registration of the Functions and add App Role to it.
+A similar approach can be achieved by using [Security Groups](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps#app-roles-vs-groups), but might evolve IT personnel managing AAD Security Groups. Here, we will work through the App Roles.
+
+Go to the application registrations:
 
 ![](docs/media/2022-05-12-19-27-45.png)
 
+select your function:
+
 ![](docs/media/2022-05-12-19-28-35.png)
 
-The App Role will containt identities which will have access to the Function based backend API. Create a new App Role
+Create a new App Role:
 
 ![](docs/media/2022-05-12-19-31-16.png)
 
-
-
-
-
-
-
-
-Go to Azure Active Directory and open the Enterprise applications page, then find the application and look for the Object ID
-
-
-
+Currently you cannot assign your APIM Application identity to the app role through the Azure Portal. You will need to go through the [Azure CLI](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-assign-app-role-managed-identity-cli) or [Powershell](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/how-to-assign-app-role-managed-identity-powershell).
 
 
 Use the Bash environment in [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart). For more information, see [Azure Cloud Shell Quickstart - Bash](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart).
 
 [Launch Cloud Shell in a new window](https://shell.azure.com/)
+
+This is the commandlet you will need to execute:
+```
+# Assign the managed identity access to the app role.
+New-AzureADServiceAppRoleAssignment -ObjectId $APIMmanagedIdentityObjectId -Id $appRoleId -PrincipalId $APIMmanagedIdentityObjectId -ResourceId $functionServicePrincipalObjectId
+
+```
+functionServicePrincipalObjectId : 
+
+![](docs/media/2022-05-13-18-33-07.png)
+
+
+Go to the AAD Enterprise Applications
+
+![](docs/media/2022-05-13-18-34-36.png)
+
+Copy the Object Id
+![](docs/media/2022-05-13-18-35-46.png)
+
+appRoleId : 
+
+Go to AAD App registrations, select your registration and the App Role. Copy the App Role Id
+
+![](docs/media/2022-05-13-18-38-26.png)
+
+APIMmanagedIdentityObjectId:
+
+Go to APIM - search for managed identity and copy the Object Principal id :
+
+![](docs/media/2022-05-13-18-40-10.png)
+
+Set these values in Powershell and execute the commandlet:
+
+```
+# Enterprise applications 
+$functionServicePrincipalObjectId = '15b**********'
+# App Role Id
+$appRoleId = '78b**********'
+# APIM Managed Identity
+$APIMmanagedIdentityObjectId = '891******'
+
+# Assign the managed identity access to the app role.
+New-AzureADServiceAppRoleAssignment -ObjectId $APIMmanagedIdentityObjectId -Id $appRoleId -PrincipalId $APIMmanagedIdentityObjectId -ResourceId $functionServicePrincipalObjectId
+
+```
+
+And this is [the last step](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users#update-the-app-to-require-user-assignment)
+
+![](docs/media/2022-05-13-18-45-03.png)
+
+Verify that you have no access to the function directly 
+
+![](docs/media/2022-05-13-18-47-53.png)
+
+And that you have access through the APIM:
+
+![](docs/media/2022-05-13-18-49-11.png)
+
+
+
 
 
 
