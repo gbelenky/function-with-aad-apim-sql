@@ -349,7 +349,52 @@ And that you have access through the APIM:
 
 ## Protect exposed API through APIM API Keys for the external developers
 
+Create a new APIM Product so that external parties can test your API for free (or non-production purposes) from the APIM blade, limit access to just one subscription and add your API to it:
 
+![](docs/media/2022-05-16-12-18-43.png)
 
+Add Users and Guests to your Product through the Access Control
+
+![](docs/media/2022-05-16-12-16-11.png)
+
+Add Rate Limit Policy to the Product and limit it to 5 calls per minute and to the overall quota of 100 calls in 7 days.
+
+![](docs/media/2022-05-16-12-33-31.png)
+
+![](docs/media/2022-05-16-12-34-14.png)
+
+Publish your product:
+
+![](docs/media/2022-05-16-12-36-37.png)
+
+Your APIs are usually provided to the API users through the [API subscriptions assigned to your products](https://docs.microsoft.com/en-us/azure/api-management/api-management-subscriptions).
+
+You can [create your users directly in the portal or invite them through the portal](https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-or-invite-developers)
+
+The [Developer Portal](fully customizable website with the documentation of your APIs. It is where API consumers can discover your APIs, learn how to use them, request access, and try them out.) is a fully customizable website with the documentation of your APIs. It is where API consumers can discover your APIs, learn how to use them, request access, and try them out. 
+
+Developers using your APIs can request access to the Developer Portal and receive their API keys using the self-service capabilities of the portal.
+
+Please have a look at the [API Management capabilies here](https://docs.microsoft.com/en-us/azure/api-management/api-management-key-concepts).
+
+For the sake of simplicity I created a user with my corporate email address and created a subscription for this user:
+
+![](docs/media/2022-05-16-15-28-18.png)
+
+The user received the email notification:
+
+![](docs/media/2022-05-16-15-29-18.png)
+
+The user will see the product here - https://function-with-aad-apim-sql-apim.developer.azure-api.net/product#product=todo-starter
+
+![](docs/media/2022-05-16-17-01-29.png)
+
+![](docs/media/2022-05-16-17-01-56.png)
+
+Now the user can try it with the Product Subscription Key
+
+![](docs/media/2022-05-16-17-02-53.png)
+
+![](docs/media/2022-05-16-17-03-23.png)
 
 
