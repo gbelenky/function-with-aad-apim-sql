@@ -10,7 +10,6 @@ This step-by-step tutorial will implement architecture above and contain the fol
 - Expose the API through the API management
 - Protect Back-End API through AAD so that only this APIM instance can access the back-end API
 - Protect exposed API through the APIM API Keys for the external developers
-- Test access to the exposed API through the developer portal
 - Optional. Protect access to Azure SQL through AAD while using Functions. [Based on this ](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) and [this tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) 
 
 Audience: teams exploring new generation cloud services implementation concepts
@@ -397,4 +396,7 @@ Now the user can try it with the Product Subscription Key
 
 ![](docs/media/2022-05-16-17-03-23.png)
 
+** Optional. Protect access to Azure SQL through AAD while using Functions.
 
+If you want to add identity based protection of your Azure SQL and avoid using connection strings, [you can follow this guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity)
+ 
