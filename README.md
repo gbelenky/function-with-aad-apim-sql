@@ -9,7 +9,7 @@ This step-by-step tutorial will implement architecture above and contain the fol
 - Deploy Azure Function into Azure
 - Expose the API through the API management
 - Protect Back-End API through AAD so that only this APIM instance can access the back-end API
-- Protect exposed API through APIM API Keys for the external developers
+- Protect exposed API through the APIM API Keys for the external developers
 - Test access to the exposed API through the developer portal
 - Optional. Protect access to Azure SQL through AAD while using Functions. [Based on this ](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) and [this tutorial](https://docs.microsoft.com/en-us/azure/azure-functions/functions-identity-access-azure-sql-with-managed-identity) 
 
@@ -330,7 +330,11 @@ New-AzureADServiceAppRoleAssignment -ObjectId $APIMmanagedIdentityObjectId -Id $
 
 ```
 
-And this is [the last step](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users#update-the-app-to-require-user-assignment)
+You can see that your back-end Function was successfuly added to the App Role if you go to the Azure AD, Enteprise Applications, locate your application and look at the Users and Groups:
+
+![](docs/media/2022-05-16-10-41-12.png)
+
+And finally [the last step](https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-restrict-your-app-to-a-set-of-users#update-the-app-to-require-user-assignment)
 
 ![](docs/media/2022-05-13-18-45-03.png)
 
@@ -342,6 +346,8 @@ And that you have access through the APIM:
 
 ![](docs/media/2022-05-13-18-49-11.png)
 
+
+## Protect exposed API through APIM API Keys for the external developers
 
 
 
