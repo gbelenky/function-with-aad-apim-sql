@@ -1,4 +1,4 @@
-# Create an identity-protected API implementation with Azure Functions, Azure SQL and API Management 
+# Create an identity-protected API back-end with Azure Functions, Azure SQL and API Management 
 
 ![](docs/media/2022-05-02-17-13-20.png)
 
